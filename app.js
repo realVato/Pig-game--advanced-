@@ -12,7 +12,7 @@ The player loses his current score when one of them rolls 1 (CSS).
 
 */
 
-var score, roundScore, activePlayer, thisRoll, lastRoll, count;
+var score, roundScore, activePlayer, thisRoll, lastRoll, count, winningScore;
 
 init();
 
@@ -55,10 +55,16 @@ document.getElementById('current-' + activePlayer).textContent = roundScore;
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
 
+if (document.getElementById("winningScore").value) {
+    myFunction();
+} else {
+    winningScore;
+}
+
 // 1. Transfer round score to the general score
 score[activePlayer] += roundScore;
 document.getElementById('score-' + activePlayer).textContent = score[activePlayer];
-if (score[activePlayer] >= 100) {
+if (score[activePlayer] >= winningScore) {
     document.getElementById('name-' + activePlayer).textContent = 'Winner!';
     diceDisplay();
     document.querySelector('.btn-roll').style.display = 'none';
@@ -94,8 +100,9 @@ function init() {
 
     score = [0, 0];
     roundScore = 0;
+    winningScore = 100;
     activePlayer = 0;
-    thisRoll = 0 
+    thisRoll = 0        
     lastRoll = 0
     count = 0;
 
@@ -110,6 +117,7 @@ function init() {
     document.querySelector('.player-1-panel').classList.remove('active');
     document.getElementById('name-0').textContent = 'Player 1';
     document.getElementById('name-1').textContent = 'Player 2';
+    document.getElementById('winningScore').value = '';
     diceDisplay();
 
 }
@@ -119,3 +127,7 @@ function diceDisplay() {
     document.querySelector('.dice').style.display = 'none';
 
 }
+
+function myFunction() {
+    winningScore = document.getElementById("winningScore").value;
+    }

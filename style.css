@@ -1,6 +1,9 @@
 /**********************************************
 *** GENERAL
 **********************************************/
+::-webkit-input-placeholder {
+    text-align: center;
+ }
 
 * {
     margin: 0;
@@ -152,3 +155,10 @@ i {
 
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+.winningScore {
+    top: 530px;
+    left: 42%;
+    position: absolute;
+}
+.winningScore span { position: relative; left: -19%; }
