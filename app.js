@@ -12,14 +12,7 @@ The player loses his current score when one of them rolls 1 (CSS).
 
 */
 
-var score, roundScore, activePlayer;
-var thisDice, lastDice, count; // Challenge #1
-
-thisDice = 0;
-lastDice = 0;
-count = 0;
-
-
+var score, roundScore, activePlayer, thisRoll, lastRoll, count;
 
 init();
 
@@ -29,7 +22,7 @@ init();
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
 //1. Random number
-var dice = 6;
+var dice = Math.floor(Math.random() * 6) + 1;
 
 //2. Show result
 var diceDOM = document.querySelector('.dice');
@@ -40,7 +33,15 @@ diceDOM.src = 'dice-' + dice + '.png';
 if (dice > 1) {
     roundScore += dice;
     thisRoll = dice;
-    checkRoll();
+    if (thisRoll === 6) {
+        lastRoll = 6;
+        count += 1;
+    }
+    if (lastRoll === 6 && thisRoll === 6 && count === 2) {
+        lastRoll = 0;
+        count = 0;
+        nextPlayer();
+    }
 } else {
     nextPlayer();
 }
@@ -65,8 +66,9 @@ if (score[activePlayer] >= 100) {
 
 } else {
     nextPlayer();
+    count = 0;
+    lastRoll = 0;
 }
-
 });
 
 // **********************
@@ -85,7 +87,6 @@ function nextPlayer() {
     document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
     document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
-    diceDisplay();
 
 }
 
@@ -94,6 +95,9 @@ function init() {
     score = [0, 0];
     roundScore = 0;
     activePlayer = 0;
+    thisRoll = 0 
+    lastRoll = 0
+    count = 0;
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -107,6 +111,7 @@ function init() {
     document.getElementById('name-0').textContent = 'Player 1';
     document.getElementById('name-1').textContent = 'Player 2';
     diceDisplay();
+
 }
 
 function diceDisplay() {
@@ -114,6 +119,3 @@ function diceDisplay() {
     document.querySelector('.dice').style.display = 'none';
 
 }
-
-
-
