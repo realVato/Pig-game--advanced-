@@ -1,18 +1,16 @@
 /*
 3 CHALLENGES:
 
-1.A player loses his ENTIRE score when he rolls two 6's in a row.
+1.A player loses his ENTIRE score when he rolls two 6's in a row.            
 After that, it's the next player's turn . (Save previous dice in a
     different variable, always.)
-2. Add an input field to the HTML where players can set the winning
+2. Add an input field to the HTML where players can set the winning          
  score, so that they can change the predefined score of 100.
  (you can read that value with the .value property in JS).
 3. Add another dice to the game so that there is 2.
 The player loses his current score when one of them rolls 1 (CSS).  
 
 */
-
-var score, roundScore, activePlayer, thisRoll, lastRoll, count, winningScore;
 
 init();
 
@@ -105,6 +103,13 @@ function init() {
     thisRoll = 0        
     lastRoll = 0
     count = 0;
+    dice = Math.floor(Math.random() * 6) + 1;
+    dice2 = Math.floor(Math.random() * 6) + 1;
+
+    //Random dice numbers on each initialize
+    document.querySelector('.dice').src = 'dice-' + dice + '.png';
+    document.querySelector('.dice2').src = 'dice-' + dice2 + '.png';
+    //------------------------------------------------------------->
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -124,10 +129,12 @@ function init() {
 
 function diceDisplay() {
 
-    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice').style.display = 'block';
 
 }
 
 function myFunction() {
+
     winningScore = document.getElementById("winningScore").value;
+
     }
