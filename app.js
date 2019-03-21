@@ -21,15 +21,20 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
 //1. Random number
 var dice = Math.floor(Math.random() * 6) + 1;
+var dice2 = Math.floor(Math.random() * 6) + 1;
 
 //2. Show result
 var diceDOM = document.querySelector('.dice');
 diceDOM.style.display = 'block';
 diceDOM.src = 'dice-' + dice + '.png';
 
+var diceDOM2 = document.querySelector('.dice2');
+diceDOM2.style.display = 'block';
+diceDOM2.src = 'dice-' + dice2 + '.png';
+
 //3. Add result to current score
-if (dice > 1) {
-    roundScore += dice;
+if (dice > 1 && dice2 > 1) {
+    roundScore += dice + dice2;
     thisRoll = dice;
     if (thisRoll === 6) {
         lastRoll = 6;
